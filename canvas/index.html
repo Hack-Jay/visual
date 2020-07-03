@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /* 样式宽高 */
+        canvas {
+            width: 256px;
+            height: 256px;
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 画布宽高 -->
+    <canvas width="512" height="512"></canvas>
+</body>
+
+<script>
+    // 1.获取 Canvas 对象，通过 getContext(‘2d’) 得到 2D 上下文；
+    // 2.设置绘图状态，比如填充颜色 fillStyle，平移变换 translate 等等；
+    // 3.调用 beginPath 指令开始绘制图形；
+    // 4.调用绘图指令，比如 rect，表示绘制矩形；
+    // 5.调用 fill 指令，将绘制内容真正输出到画布上。
+
+    const rectSize = [100, 100]
+    const canvas = document.querySelector('canvas')
+    const context = canvas.getContext('2d')
+
+    context.fillStyle = 'red'
+    context.beginPath()
+
+    context.save()
+
+    // 先把画布进行平移到中间，再绘制
+    context.translate(-0.5 * rectSize[0], -0.5 * rectSize[1]);
+    context.rect(0.5 * canvas.width, 0.5 * canvas.height, 100, 100)
+
+    // 恢复画布状态再重新绘制
+    context.restore()
+    context.rect(0.5 * (canvas.width - rectSize[0]), 0.5 * (canvas.height - rectSize[1]), ...rectSize);
+
+    context.fill()
+
+</script>
+
+</html>
